@@ -72,4 +72,3 @@ Este é um projeto prático desenvolvido em **Django** para demonstrar operaçõ
    Abra `http://127.0.0.1:8000/` para visualizar o sistema em funcionamento e insira as credenciais do superusuário criado para acessar.
 
 ---
-*Este é um projeto com fins práticos e educacionais, focado em demonstrar o potencial do ecossistema Django.*
