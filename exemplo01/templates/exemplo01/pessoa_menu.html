@@ -1,0 +1,70 @@
+{% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_messages %}
+{% load render_table from django_tables2 %}
+<!doctype html>
+<html>
+<head>
+    <title>Menu de Pessoas</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <center>
+                <p>bdpratico\exemplo01\templates\exemplo01\pessoa_menu.html</p>
+                <img src="{% static 'pessoa.png' %}" class="img-fluid" alt="Teste" width="15%">
+                <br><br>
+                {% render_table table %}
+                <br>
+                <a href="{% url 'pessoa_create_alias' %}">
+                    <input type="button" class="btn btn-primary" value="Incluir novas pessoas">
+                </a>
+            </center>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmação -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Confirmar Exclusão</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form id="deleteForm" method="POST" action="">
+            {% csrf_token %}
+            <div class="modal-body">
+              Tem certeza que deseja excluir <strong id="delete-nome"></strong>?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-danger">Sim, excluir</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            // Botão que acionou o modal
+            var button = event.relatedTarget
+            // Extrai as informações dos atributos data-bs-*
+            var recipient = button.getAttribute('data-bs-id')
+            var nome = button.getAttribute('data-bs-nome')
+            
+            // Atualiza o conteúdo do modal
+            var modalBodyNome = deleteModal.querySelector('#delete-nome')
+            var deleteForm = deleteModal.querySelector('#deleteForm')
+            
+            modalBodyNome.textContent = nome
+            // Gera a URL dinamicamente trocando o '99999' pelo ID real
+            var url = "{% url 'pessoa_delete_alias' 99999 %}".replace('99999', recipient);
+            deleteForm.action = url;
+        })
+    </script>
+</body>
+</html>
