@@ -22,3 +22,5 @@ class PessoaCustomizado(admin.ModelAdmin):
         return idade
 
 admin.site.register(pessoa, PessoaCustomizado)
+admin.site.register(procedimento)
+admin.site.register(procedimento_executado)

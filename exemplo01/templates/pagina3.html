@@ -1,15 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% bootstrap_messages %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Página3.html</title>
-</head>
-<body>
+
+{% block title %}Página3.html{% endblock %}
+
+{% block content %}
     <img src="{% static 'pagina3.png' %}" class="img-fluid" alt="Teste" width="15%">
     <p class="h2">Colocando Estilos na Página</p>
     <p>bdpratico\exemplo01\templates\pagina3.html</p>
@@ -31,5 +25,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

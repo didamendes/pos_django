@@ -1,14 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% bootstrap_messages %}
-<!doctype html>
-<html>
-<head>
-    <title>Pessoas</title>
-</head>
-<body>
+
+{% block title %}Pessoas{% endblock %}
+
+{% block content %}
     <center>
         <br><br><br><br>
         <img src="{% static 'pessoa.png' %}" class="img-fluid" alt="Teste" width="15%">
@@ -30,5 +25,5 @@ style="width:250px;">
             </div>
         </center>
     </form>
-</body>
 <br><br>
+{% endblock %}

@@ -1,14 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% bootstrap_messages %}
-<!doctype html>
-<html>
-<head>
-    <title>Excluir Pessoas</title>
-</head>
-<body>
+
+{% block title %}Excluir Pessoas{% endblock %}
+
+{% block content %}
     <div class="container">
         <div class="col-md-12 col-sm-12 col-xs-12">
             <center>
@@ -22,5 +17,4 @@
             </center>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

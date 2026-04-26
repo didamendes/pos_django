@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Página2.html</title>
-    </head>
-    <body>
+{% extends 'base.html' %}
+
+{% block title %}Página2.html{% endblock %}
+
+{% block content %}
         <h1>Hello World!</h1>
         <p>bdpratico\exemplo01\templates\pagina2.html</p>
         {% for regs in pessoas %}
             <p>{{ regs.nome }} - {{ regs.email }} - {{ regs.fone }}</p>
         {% endfor %}
-    </body>
-</html>
+{% endblock %}
