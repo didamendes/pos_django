@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KNN Inferência</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        input {
+            width: 110px;
+            margin: 4px;
+            padding: 4px;
+        }
+
+        .grupo {
+            margin-bottom: 15px;
+        }
+
+        .resultado {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function corrigirDecimal(input) {
+            input.value = input.value.replace(",", ".");
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Inferência KNN</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- W -->
+        <div class="grupo">
+            <h3>Grupo W</h3>
+            <input name="mdw" value="{{ valores.mdw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="latw" value="{{ valores.latw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="tmcw" value="{{ valores.tmcw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="racw" value="{{ valores.racw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="araw" value="{{ valores.araw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="mcw" value="{{ valores.mcw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="psdsw" value="{{ valores.psdsw|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="s6w" value="{{ valores.s6w|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+        </div>
+
+        <!-- R -->
+        <div class="grupo">
+            <h3>Grupo R</h3>
+            <input name="mdr" value="{{ valores.mdr|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="latr" value="{{ valores.latr|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="tmcr" value="{{ valores.tmcr|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="racr" value="{{ valores.racr|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="arar" value="{{ valores.arar|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="mcr" value="{{ valores.mcr|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="psdsr" value="{{ valores.psdsr|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="s6r" value="{{ valores.s6r|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+        </div>
+
+        <!-- G -->
+        <div class="grupo">
+            <h3>Grupo G</h3>
+            <input name="mdg" value="{{ valores.mdg|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="latg" value="{{ valores.latg|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="tmcg" value="{{ valores.tmcg|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="racg" value="{{ valores.racg|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="arag" value="{{ valores.arag|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="mcg" value="{{ valores.mcg|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="psdsg" value="{{ valores.psdsg|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="s6g" value="{{ valores.s6g|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+        </div>
+
+        <!-- B -->
+        <div class="grupo">
+            <h3>Grupo B</h3>
+            <input name="mdwb" value="{{ valores.mdwb|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="latb" value="{{ valores.latb|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="tmcb" value="{{ valores.tmcb|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="racb" value="{{ valores.racb|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="arab" value="{{ valores.arab|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="mcb" value="{{ valores.mcb|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="psdsb" value="{{ valores.psdsb|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+            <input name="s6b" value="{{ valores.s6b|default:'' }}" type="text" oninput="corrigirDecimal(this)">
+        </div>
+
+        <button type="submit">Executar Inferência</button>
+    </form>
+
+    {% if resultado %}
+    <div class="resultado">
+        Resultado previsto: <span style="color: green;">{{ resultado }}</span>
+    </div>
+    {% endif %}
+
+    {% if erro %}
+    <div style="color: red; margin-top: 15px;">
+        {{ erro }}
+    </div>
+    {% endif %}
+</body>
+
+</html>

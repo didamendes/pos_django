@@ -34,3 +34,9 @@ class procedimento_executado(models.Model):
         return self.obs
     class Meta:
         ordering = ['pessoa', 'procedimento']
+
+class exame(models.Model):
+    valor = models.FloatField(null=True, blank=True, default=None, verbose_name='Valor')
+
+    def __str__(self):
+        return str(self.valor)

@@ -4,12 +4,15 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_tables2 import SingleTableView
+from django.core.files.storage import FileSystemStorage
+from plotly.offline import plot
 
 from .models import pessoa
 from .forms import PessoaForm
 from .tables import pessoa_table
-from django.contrib.auth.models import User, Group
+from .models import exame
 
+import plotly.graph_objs as go
 
 class PermissionRequiredGenericMixin:
     """
@@ -138,6 +141,45 @@ def pagina6(request):
     registros = pessoa.objects.all()
     dicionario['pessoas'] = registros
     return render(request, 'pagina6.html', dicionario)
+
+
+def pagina11(request):
+    import os
+    if request.method == 'POST' and request.FILES['arq_upload']:
+        fss = FileSystemStorage()
+        upload = request.FILES['arq_upload']
+        file1 = fss.save(upload.name, upload)
+        file_url = fss.url(file1)
+
+        print("upload", upload)
+        print("file1", file1)
+        print("file_url", file_url)
+
+        file2 = open(file1, 'r')
+        for row in file2:
+            colunas = row.replace("(", "").replace(")", "").split(",")
+            exame.objects.create(valor=float(colunas[8]))
+        file2.close()
+        os.remove(file_url.replace("/", ""))
+        return HttpResponse("Arquivo Importado")
+    return render(request, 'pagina11.html')
+
+def pagina12(request):
+    exame_tmp = exame.objects.all()
+    eixo_x = []
+    eixo_y = []
+    i = 0
+    for e in exame_tmp:
+        i += 1
+        eixo_x.append(i)
+        eixo_y.append(e.valor)
+    figura = go.Figure()
+    figura.add_trace(go.Scatter(x=eixo_x, y=eixo_y, mode='lines', line_color='rgb(0, 0, 255)'))
+    figura.update_layout(title="Dados de Exame", title_x=0.5, xaxis_title='Tempo', yaxis_title='Batimento Cardíaco')
+    plot_div = plot(figura, output_type='div')
+    dicionario = {}
+    dicionario['grafico'] = plot_div
+    return render(request, 'pagina12.html', dicionario)
 
 class pessoa_menu(SingleTableView):
     model = pessoa

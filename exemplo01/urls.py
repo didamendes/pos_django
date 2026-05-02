@@ -17,6 +17,10 @@ urlpatterns = [
 
     path('pagina6/', views.pagina6, name='pagina6_alias'),
 
+    path('pagina11/', views.pagina11, name='pagina11_alias'),
+
+    path('pagina12/', views.pagina12, name='pagina12_alias'),
+
     path('menu/', views.pessoa_menu.as_view(), name='pessoa_menu_alias'),
 
     path("pessoa_create/", views.pessoa_create.as_view(), name='pessoa_create_alias'),

@@ -24,3 +24,4 @@ class PessoaCustomizado(admin.ModelAdmin):
 admin.site.register(pessoa, PessoaCustomizado)
 admin.site.register(procedimento)
 admin.site.register(procedimento_executado)
+admin.site.register(exame)

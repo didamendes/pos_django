@@ -1,0 +1,23 @@
+{% load static %}
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curva ROC</title>
+    {% bootstrap_css %}
+</head>
+<body>
+    {% bootstrap_javascript %}
+    {% bootstrap_messages %}
+
+    <div class="container mt-5">
+        <h1 class="text-center">Curva ROC do Modelo KNN</h1>
+        <div class="text-center">
+            {{ graph|safe }}
+        </div>
+    </div>
+</body>
+</html>
